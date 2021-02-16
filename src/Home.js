@@ -23,9 +23,21 @@ function Home() {
       setAge(21)
     }
   }
+  const [blogs, setBlogs] = useState([
+    {title: "Blog 1", body: "This is the first blog", author: "Edward", id: 1},
+    {title: "Blog 2", body: "This is the second blog", author: "Shawn", id: 2},
+    {title: "Blog 3", body: "This is the third blog", author: "DojONinja", id: 3},
+    {title: "Blog 4", body: "This is the fourth blog", author: "Edward", id: 4},
+  ]);
   return ( 
     <div className="home">
       <h2>Home Page</h2>
+      {blogs.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <h2>{blog.title}</h2>
+          <p>Written By { blog.author }</p>
+        </div>
+      ))}
       <p>{name} is { age } years old</p>
       <button onClick={alterData}>Alter name and age</button><br/>
       <button onClick={handleClick}>Click Me</button><br/>
