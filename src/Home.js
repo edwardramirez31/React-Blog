@@ -25,26 +25,45 @@ function Home() {
     }
   }
   
-  const [blogs, setBlogs] = useState([
-    {title: "Blog 1", body: "This is the first blog", author: "Edward", id: 1},
-    {title: "Blog 2", body: "This is the second blog", author: "Shawn", id: 2},
-    {title: "Blog 3", body: "This is the third blog", author: "DojONinja", id: 3},
-    {title: "Blog 4", body: "This is the fourth blog", author: "Edward", id: 4},
-  ]);
+  const [blogs, setBlogs] = useState(null);
   function handleDelete(id) {
     setBlogs(blogs.filter(blog => blog.id !== id));
   }
   //UseEffect Hook
   // Es un Hook que me permite correr codigo siempre que se renderice el JSX
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    console.log(blogs);
-  });
+    // npx json-server --watch data/db.json --port 8000
+    fetch('http://localhost:8000/blogs')
+      .then(response => {
+        console.log(response);
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("HTTP ERROR: " + response.status);
+        }
+      })
+      .then(data => {
+        setBlogs(data);
+        setIsLoading(false);
+        // en caso de que haga mas peticiones despues, quiero quitar el error
+        setError(null);
+      })
+      .catch(err => {
+        setError(true);
+        setIsLoading(false);
+        console.log(err);
+      });
+  }, []);
 
   
   return ( 
     <div className="home">
-      <BlogList blogs={blogs} title="All Posts" handleDelete={handleDelete}/>
-      <BlogList blogs={blogs.filter(blog => blog.author==="Edward")} title="Edward Posts" />
+      {error && <div>Something went wrong</div>}
+      {isLoading && <div>Loading...</div>}
+      {blogs && <BlogList blogs={blogs} title="All Posts" handleDelete={handleDelete} />}
+      {blogs && <BlogList blogs={blogs.filter(blog => blog.author === "mario")} title="Mario's Posts" />}
       <p>{name} is { age } years old</p>
       <button onClick={alterData}>Alter name and age</button><br/>
       <button onClick={handleClick}>Click Me</button><br/>
