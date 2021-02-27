@@ -33,9 +33,14 @@ function Home() {
   // Es un Hook que me permite correr codigo siempre que se renderice el JSX
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  // Abort Controller 
+  var controller = new AbortController();
+  var signal = controller.signal;
   useEffect(() => {
     // npx json-server --watch data/db.json --port 8000
-    fetch('http://localhost:8000/blogs')
+    fetch('http://localhost:8000/blogs', {
+      signal
+    })
       .then(response => {
         console.log(response);
         if (response.ok) {
@@ -51,10 +56,19 @@ function Home() {
         setError(null);
       })
       .catch(err => {
-        setError(true);
-        setIsLoading(false);
-        console.log(err);
+        if (err.name === "AbortError") {
+          console.log("Fetch aborted");
+        } else {
+          setError(true);
+          setIsLoading(false);
+          console.log(err);
+        }
       });
+    
+    return () => {
+      console.log('Cleanup')
+      controller.abort();
+    }
   }, []);
 
   

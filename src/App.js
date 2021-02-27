@@ -2,7 +2,9 @@ import Home from './Home';
 import Navbar from './Navbar';
 import Counter from './Counter';
 import Create from './Create';
+import Screen from './Screen';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import BlogDetail from './BlogDetail';
 function App() {
   return (
     <Router>
@@ -21,8 +23,14 @@ function App() {
             <Route exact path='/create/ward'>
               <h2>Create Ward</h2>
             </Route>
-            <Route path='/'>
+            <Route exact path='/'>
               <Home />
+            </Route>
+            <Route path='/screen'>
+              <Screen />
+            </Route>
+            <Route path='/blogs/:id'>
+              <BlogDetail />
             </Route>
           </Switch>
         </div>
