@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const Categories = () => {
+const Categories = ({ setItems, data }) => {
+  const allCategories = ["all", ...new Set(data.map(item => item.category))];
+  
+  const handleClick = (e) => {
+    const category = e.target.innerHTML;
+    if (category === "all") {
+      setItems(data);
+    } else {
+      setItems(data.filter(item => item.category === category));
+    }
+  }
   return (
-    <h2>categories component
-    
-    </h2>
+    <div className="btn-container">
+      {allCategories.map((category, index) => {
+        return (
+          <button
+            key={index}
+            className="filter-btn"
+            onClick={handleClick}
+          >
+            {category}
+          </button>
+        )
+      })}
+    </div>
   );
 };
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Menu from './Menu';
 import Categories from './Categories';
-import items from './data';
+import data from './data';
 
 function MenuApp() {
+  const [items, setItems] = useState(data);
   return (
     <main>
       <section className="menu section">
@@ -11,11 +12,11 @@ function MenuApp() {
           <h2>Our Menu</h2>
           <div className="underline"></div>
         </div>
-        <div className="btn-container">
-
-        </div>
+        <Categories setItems={setItems} data={data}/>
         <div className="section-center">
-
+          {items.map(item => (
+            <Menu key={item.id} {...item}/>
+          ))}
         </div>
       </section>
     

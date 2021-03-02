@@ -1,14 +1,19 @@
 import React from 'react';
 
-const Menu = () => {
+const Menu = ({id, title, category, price, img, desc}) => {
   return (
-    <main>
-      <section className="title">
-        <h3>Our Menu</h3>
-        <div className="underline"></div>
-      </section>
-    
-    </main>
+    <article className="menu-item">
+      <img src={img} alt={title} className="photo" />
+      <div className="item-info">
+        <header>
+          <h4>{title}</h4>
+          <h4 className="price">${price }</h4>
+        </header>
+        <p className="item-text">
+          {desc}
+        </p>
+      </div>
+    </article>
   );
 };
 
