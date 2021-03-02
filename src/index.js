@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 import App from './App';
+// import './ReviewComponents/review.css';
+// import './AccordionComponents/accordion.css';
+import './MenuComponents/menu.css';
+
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(

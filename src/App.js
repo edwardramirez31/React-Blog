@@ -6,11 +6,13 @@ import Screen from './Screen';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import BlogDetail from './BlogDetail';
 import NotFound from './NotFound';
+import ReviewApp from './ReviewComponents/ReviewApp';
+import AccordionApp from './AccordionComponents/AccordionApp';
+import MenuApp from './MenuComponents/MenuApp';
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
         <div className="content">
           <Switch>
             <Route path='/counter'>
@@ -19,6 +21,7 @@ function App() {
               </Counter>
             </Route>
             <Route path='/create'>
+              <Navbar />
               <Create />
             </Route>
             <Route exact path='/create/ward'>
@@ -32,6 +35,15 @@ function App() {
             </Route>
             <Route path='/blogs/:id'>
               <BlogDetail />
+            </Route>
+            <Route path='/review'>
+              <ReviewApp />
+            </Route>
+            <Route path='/accordion'>
+              <AccordionApp />
+            </Route>
+            <Route path='/menu'>
+              <MenuApp />
             </Route>
             <Route path='*'>
               <NotFound />
