@@ -9,6 +9,8 @@ import NotFound from './NotFound';
 import ReviewApp from './ReviewComponents/ReviewApp';
 import AccordionApp from './AccordionComponents/AccordionApp';
 import MenuApp from './MenuComponents/MenuApp';
+import TabsApp from './TabsComponents/TabsApp';
+import SliderApp from './SliderComponents/SliderApp';
 function App() {
   return (
     <Router>
@@ -44,6 +46,12 @@ function App() {
             </Route>
             <Route path='/menu'>
               <MenuApp />
+            </Route>
+            <Route path='/tabs'>
+              <TabsApp />
+            </Route>
+            <Route path='/slider'>
+              <SliderApp />
             </Route>
             <Route path='*'>
               <NotFound />

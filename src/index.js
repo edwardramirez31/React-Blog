@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 // import './ReviewComponents/review.css';
 // import './AccordionComponents/accordion.css';
-import './MenuComponents/menu.css';
+// import './MenuComponents/menu.css';
+// import './TabsComponents/tabs.css';
+import './SliderComponents/slider.css';
 
 import reportWebVitals from './reportWebVitals';
 
